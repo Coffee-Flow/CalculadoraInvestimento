@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador</title>
+  <link rel="stylesheet" href="cssSimulador.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="centro" id="div_a">
+    Qual o seu nome? <br />
+    <input id="input_nome" /><button onclick="proximo1()">Proximo</button>
+  </div>
+  <br />
+  <div class="centro" id="div_b"></div>
+  <br />
+  <div class="centro" id="div_c"></div>
+  <br />
+  <div class="centro" id="div_d"></div>
+  <br />
+  <div class="centro" id="div_e"></div>
+  <br /><br /><br /><br /><br /><br /><br /><br />
+  <div class="centro" id="div_f"></div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Simulador Financeiro
+  var nome = "";
+  var largura = 0;
+  var comprimento = 0;
+  var rad1 = 0;
+  var irriga = "aspersão";
+  var rad2 = 0;
+  var sensores = 0;
+  var sacas = 0;
+  var preco = 779.9;
+  var dinheiro = 0;
+  var vendaa = 0;
+  var hectar = 10000;
+  var safra = 0;
+  // Simulador Investimento
+  var CSensor = Number(85.4);
+  var CAsper = Number(23.07);
+  var CBateria = Number(11.25);
+  var CCarregador = Number(46.9);
+  var CMangueira = Number(526.96);
+  var CBomba = Number(549.9);
+  var tamaHectar = 0;
+  var tamanho = 0;
+  var custoAsper =
+    25 * (CSensor + CAsper + CBateria) + CCarregador + CMangueira;
+  var custoSensor = 25 * (CSensor + CBateria) + CCarregador;
+  var custoo = 0;
+  var cust = 0;
+  const custo = 0;
+  const venda = 0;
+
+  function proximo1() {
+    nome = input_nome.value;
+    div_a.innerHTML = `Qual a largura do seu plantio? (em metros) <br> <input id="input_largura">  <button onclick="proximo2()">Proximo</button>`;
+  }
+  function proximo2() {
+    largura = Number(input_largura.value);
+    div_a.innerHTML = `Qual o comprimento do seu plantio? (em metros)  <input id="input_comprimento">  <button onclick="proximo3()">Proximo</button>`;
+  }
+  function proximo3() {
+    comprimento = Number(input_comprimento.value);
+    div_a.innerHTML = `<span> Você já possui um sistema de irrigação? </span>  Sim: <input type="radio" name="rad1" onclick="rad1s()"> Não <input type="radio" name="rad1">  <button onclick="proximo4()">Proximo</button>`;
+  }
+  function rad1s() {
+    rad1 = 1;
+  }
+  function proximo4() {
+    if (rad1 == 1) {
+      div_a.innerHTML = `<span> Qual é esse sistema? </span> Aspersão: <input type="radio" name="sis" onclick="asper()"> Superfície: <input type="radio" name="sis" onclick="super()"> Localizada: <input type="radio" name="sis" onclick="local()"> Subirrigação: <input type="radio" name="sis" onclick="subi()">  <button onclick="proximo6()">Proximo</button>`;
+    } else { proximo5()
+    }
+  }
+  function asper() {
+    irriga = "aspersão";
+  }
+  function superf() {
+    irriga = "superfície";
+  }
+  function local() {
+    irriga = "localizada";
+  }
+  function subi() {
+    irriga = "subirrigação";
+  }
+  function proximo5() {
+    sacas = 30;
+    tamaHectar = comprimento * largura;
+    tamanho = tamaHectar / hectar;
+    safra = sacas * tamanho;
+    vendaa = safra * preco;
+
+    const venda = vendaa;
+    const moeda = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(venda);
+
+    div_a.innerHTML = `Olá ${nome}, o seu plantio de café é de ${largura * comprimento
+      } metros quadrados`;
+    div_d.innerHTML = `A produção do seu plantio em média é de ${safra.toFixed(
+      0
+    )} sacas de café.`;
+    div_e.innerHTML = `Que equivalem á ${moeda}`;
+    div_f.innerHTML = `Se fosse com o sistema de aspersão da nossa empresa<br> <button onclick="proximo6()">Plantação Irrigada</button>`;
+    div_f.innerHTML += `Quanto custaria para investir no nosso projeto<button onclick="investimentoS()">Investir</button>`;
+  }
+  function proximo6() {
+    sacas = 55;
+    tamaHectar = comprimento * largura;
+    tamanho = tamaHectar / hectar;
+    safra = sacas * tamanho;
+    vendaa = safra * preco;
+
+    const venda = vendaa;
+    const moeda = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(venda);
+
+    div_a.innerHTML = `Olá ${nome}, o seu plantio de café é de ${largura * comprimento
+      } metros quadrados`;
+    div_b.innerHTML = `O seu plantio já utiliza de um sistema de irrigação e o tipo de irrigação é por ${irriga}.`;
+    div_d.innerHTML = `A produção do seu plantio em média é de ${safra.toFixed(
+      0
+    )} sacas de café.`;
+    div_e.innerHTML = `Que equivalem á ${moeda}`;
+    div_f.innerHTML = `Se fosse sem irrigação<br> <button onclick="proximo5()">Plantação Sequeira</button>`;
+    div_f.innerHTML += `Quanto custaria para investir no nosso projeto<button onclick="investimentoC()">Investir</button>`;
+  }
+  function investimentoS() {
+    tamaHectar = comprimento * largura;
+    tamanho = tamaHectar / hectar;
+    custoo = custoAsper * tamanho.toFixed(2) + CBomba;
+    cust = custoo;
+    const custo = custoo;
+    const custov = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(custo);
+
+    div_b.innerHTML = "";
+    div_c.innerHTML = "";
+    div_d.innerHTML = "";
+    div_e.innerHTML = "";
+    div_f.innerHTML = `<button onclick="proximo5()">Plantação Sequeira</button><br><button onclick="proximo6()">Plantação Irrigada</button><br><button onclick="grafico()">Mostrar em Grafico</button>`;
+    div_a.innerHTML = `O tamanho do seu plantio é de ${tamanho} hectares <br> e o valor de investimento vai ser de ${custov}`;
+  }
+  function investimentoC() {
+    tamaHectar = comprimento * largura;
+    tamanho = tamaHectar / hectar;
+    custoo = custoSensor * tamanho.toFixed(2);
+    cust = custoo;
+    const custo = custoo;
+    const custov = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(custo);
+
+    div_b.innerHTML = "";
+    div_c.innerHTML = "";
+    div_d.innerHTML = "";
+    div_e.innerHTML = "";
+    div_f.innerHTML = `<button onclick="proximo5()">Plantação Sequeira</button><br><button onclick="proximo6()">Plantação Irrigada</button><br><button onclick="grafico()">Mostrar em Grafico</button>`;
+    div_a.innerHTML = `O tamanho do seu plantio é de ${tamanho} hectares <br> e o valor de investimento vai ser de ${custov}`;
+  }
+  function grafico() {
+    sacas = 55;
+    safra = sacas * tamanho;
+    vendaa = safra * preco;
+    cust = custoo;
+
+    div_b.innerHTML = "";
+    div_c.innerHTML = "";
+    div_d.innerHTML = "";
+    div_e.innerHTML = "";
+    div_f.innerHTML = `<button onclick="proximo5()">Plantação Sequeira</button><br><button onclick="proximo6()">Plantação Irrigada</button>`;
+    div_a.innerHTML = `<div><canvas id="myChart" style="width: 600px; height: 500px;"></canvas></div>`;
+
+    const ctx = document.getElementById("myChart");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["1 ano", "2 ano", "3 ano", "4 ano", "5 ano", "6 ano"],
+        datasets: [
+          {
+            label: "Investimento",
+            data: [(cust + 4000), 4000, 4000, 4000, 4000, 4000],
+            borderWidth: 1,
+          },
+          {
+            label: "Produção",
+            data: [vendaa, vendaa, vendaa, vendaa, vendaa, vendaa],
+            borderWidth: 1,
+          },
+          {
+            label: "Rendimento",
+            data: [
+              vendaa - (cust + 4000),
+              vendaa - 4000,
+              vendaa - 4000,
+              vendaa - 4000,
+              vendaa - 4000,
+              vendaa - 4000,
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
+</script>

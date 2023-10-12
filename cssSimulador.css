@@ -1,0 +1,15 @@
+.centro{ 
+    position: relative;
+    left: 0vw;
+    top: 3vw;
+    place-items: center;
+    display: grid;
+    font-size: 2vw;
+    font-family: 'Poppins', sans-serif;
+}
+input{
+    border-radius: 50px;
+}
+button{
+    border-radius: 50px;
+}
